@@ -1,10 +1,9 @@
 package io.github.chloesouss.demogsb.controller;
-import org.springframework.ui.Model;
-import io.github.chloesouss.demogsb.entity.Medecin;
+
+import io.github.chloesouss.demogsb.projection.MedecinCollectionView;
 import io.github.chloesouss.demogsb.service.MedecinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,16 +22,16 @@ public class MedecinController {
     }
 
     @GetMapping(path = "")
-    public List<Medecin> getAll(@RequestParam(required = false, name ="nom", defaultValue = "")String nom){
+    public List<MedecinCollectionView> getAll(@RequestParam(required = false, name = "nom", defaultValue = "") String nom) {
         return this.medecinService.findAllByNom(nom);
     }
 
     @GetMapping("/{id}")
-    public Medecin getById(@PathVariable("id") Long id){
-        Optional<Medecin> medecinOptional = this.medecinService.findById(id);
-        if(medecinOptional.isPresent()){
+    public MedecinCollectionView getById(@PathVariable("id") Long id) {
+        Optional<MedecinCollectionView> medecinOptional = this.medecinService.findById(id);
+        if (medecinOptional.isPresent()) {
             return medecinOptional.get();
-        } else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

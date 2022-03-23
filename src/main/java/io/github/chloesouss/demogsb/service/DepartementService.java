@@ -1,6 +1,6 @@
 package io.github.chloesouss.demogsb.service;
 
-import io.github.chloesouss.demogsb.entity.Departement;
+import io.github.chloesouss.demogsb.projection.DepartementCollectionView;
 import io.github.chloesouss.demogsb.repository.DepartementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,11 @@ public class DepartementService {
         this.departementRepository = departementRepository;
     }
 
-    public List<Departement> findAll(){
-        return departementRepository.findAll();
+    public List<DepartementCollectionView> findAll() {
+        return departementRepository.findAllDepartementBy();
     }
-    public Optional<Departement> findById(Long id){
-        return departementRepository.findById(id);
+
+    public Optional<DepartementCollectionView> findById(Long id) {
+        return departementRepository.findDepartementById(id);
     }
 }

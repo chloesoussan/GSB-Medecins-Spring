@@ -1,6 +1,7 @@
 package io.github.chloesouss.demogsb.service;
 
 import io.github.chloesouss.demogsb.entity.Medecin;
+import io.github.chloesouss.demogsb.projection.MedecinCollectionView;
 import io.github.chloesouss.demogsb.repository.MedecinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,20 @@ public class MedecinService {
         this.medecinRepository = medecinRepository;
     }
 
-    public List<Medecin> findAll() {
-        return medecinRepository.findAll();
+    public List<MedecinCollectionView> findAll() {
+        return medecinRepository.findAllMedecinBy();
     }
 
-    public Optional<Medecin> findById(Long id) {
-        return medecinRepository.findById(id);
+    public Optional<MedecinCollectionView> findById(Long id) {
+        return medecinRepository.findMedecinById(id);
     }
 
-    public List<Medecin> findAllByNom (String nom) {
-        return medecinRepository.findAllByNomContaining(nom);}
+    public List<MedecinCollectionView> findAllByNom(String nom) {
+        return medecinRepository.findAllByNomContaining(nom);
+    }
+
+    public Medecin saveMedecin(Medecin medecin) {
+        return medecinRepository.save(medecin);
+    }
 
 }

@@ -1,10 +1,8 @@
 package io.github.chloesouss.demogsb.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Set;
+
 @Entity
 @Table
 public class Departement {
@@ -52,7 +50,6 @@ public class Departement {
         this.num = num;
     }
 
-    @JsonBackReference
     public Pays getPays() {
         return pays;
     }
@@ -61,7 +58,6 @@ public class Departement {
         this.pays = pays;
     }
 
-    @JsonManagedReference
     public Set<Medecin> getMedecins() {
         return medecins;
     }

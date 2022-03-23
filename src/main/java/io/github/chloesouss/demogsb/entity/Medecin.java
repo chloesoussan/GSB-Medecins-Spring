@@ -1,8 +1,5 @@
 package io.github.chloesouss.demogsb.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -17,11 +14,12 @@ public class Medecin {
     private String nom;
     private String adresse;
     private String tel;
-    private String specialiteComplementaire;
+    @ManyToOne(optional = true)
+    private SpecialiteComplementaire specialiteComplementaire;
     @ManyToOne
     private Departement departement;
 
-    public Medecin(Long id, String prenom, String nom, String adresse, String tel, String specialiteComplementaire, Departement departement) {
+    public Medecin(Long id, String prenom, String nom, String adresse, String tel, SpecialiteComplementaire specialiteComplementaire, Departement departement) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
@@ -74,15 +72,14 @@ public class Medecin {
         this.tel = tel;
     }
 
-    public String getSpecialiteComplementaire() {
+    public SpecialiteComplementaire getSpecialiteComplementaire() {
         return specialiteComplementaire;
     }
 
-    public void setSpecialiteComplementaire(String specialiteComplementaire) {
+    public void setSpecialiteComplementaire(SpecialiteComplementaire specialiteComplementaire) {
         this.specialiteComplementaire = specialiteComplementaire;
     }
 
-    @JsonBackReference
     public Departement getDepartement() {
         return departement;
     }
